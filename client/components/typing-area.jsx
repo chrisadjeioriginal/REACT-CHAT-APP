@@ -1,4 +1,8 @@
-export function TypingArea() {
+export function TypingArea({ setText, text }) {
+  function UpdateTextContent(e) {
+    setText(e.target.value);
+  }
+
   const style = {
     width: "70%",
     height: "50%",
@@ -11,5 +15,7 @@ export function TypingArea() {
     fontSize: "20px",
   };
 
-  return <input style={style}></input>;
+  return (
+    <input style={style} onChange={UpdateTextContent} value={text}></input>
+  );
 }

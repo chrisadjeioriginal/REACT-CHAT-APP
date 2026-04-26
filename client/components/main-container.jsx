@@ -1,11 +1,11 @@
 export function MainContainer({ children }) {
   const style = {
     width: "100%",
-    height: "90%",
-    display: "flex",
-    flexDirection: "row",
+    height: "100%",
+
+    // flexDirection: "column",
     position: "relative",
-    top: "100px",
+    top: "0px",
   };
   return <div style={style}>{children}</div>;
 }

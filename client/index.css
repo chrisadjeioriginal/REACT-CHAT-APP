@@ -1,14 +1,17 @@
 body{
-    background-color: black;
+    /* background-color: black; */
     margin: 0px;
     padding: 0px;
+     background-image: url("assets/76706.jpg");
+     background-size:cover;
+     background-repeat: no-repeat;
 }
 
 #root{
 
 
     /* background-color: rgb(248, 241, 213); */
-    background-image: url("assets/76706.jpg");
+    /* background-image: url("assets/76706.jpg"); */
     background-size: cover;
     
     width: 100vw;

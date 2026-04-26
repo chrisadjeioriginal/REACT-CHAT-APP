@@ -5,9 +5,9 @@ export function InputContainer({ children }) {
     backgroundColor: "rgba(22, 19, 12, 0.09)",
 
     position: "relative",
-    top: "10px",
+    marginTop: "auto",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
   };
 
