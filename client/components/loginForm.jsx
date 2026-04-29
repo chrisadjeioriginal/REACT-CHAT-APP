@@ -1,4 +1,20 @@
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 export function LoginForm() {
+  const navigate = useNavigate();
+  async function gatherFormData(e) {
+    e.preventDefault();
+    const data = new FormData(e.target);
+
+    const values = Object.fromEntries(data.entries());
+
+    const response = await axios.post("http://localhost:3000/Login", values);
+    if (response.data.success) {
+      navigate("/ChatApp");
+    }
+  }
+
   const style = {
     position: "relative",
     display: "flex",
@@ -7,8 +23,8 @@ export function LoginForm() {
   };
   return (
     <form
+      onSubmit={gatherFormData}
       style={{
-        backgroundColor: "rgba(37, 98, 57, 0.79)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -20,39 +36,40 @@ export function LoginForm() {
     >
       <div style={style}>
         <label
-          htmlFor="Username"
+          htmlFor="username"
           style={{
             marginRight: "10px",
-            fontFamily: "Arial",
+            // fontFamily: "Arial",
           }}
         >
           USERNAME:{" "}
         </label>
-        <input id="Username" />
+        <input name="username" id="username" />
       </div>
 
       <div style={style}>
-        <label
-          htmlFor="Password"
-          style={{ marginRight: "10px", fontFamily: "Arial" }}
-        >
+        <label htmlFor="password" style={{ marginRight: "10px" }}>
           PASSWORD:{" "}
         </label>
-        <input id="Password" />
+        <input name="password" id="password" />
       </div>
 
       <button
+        type="submit"
         style={{
-          backgroundColor: "rgba(37, 98, 57, 0.79)",
+          backgroundColor: "rgba(93, 135, 141, 0.79)",
           border: "2px dotted white",
-          fontFamily: "Arial",
+
           cursor: "pointer",
           position: "relative",
           top: "60px",
+          border: "1px solid black",
+          borderRadius: "10px",
+          boxShadow: "5px 5px 5px rgba(0, 213, 255, 0.44)",
         }}
       >
         {" "}
-        LOGIN{" "}
+        login{" "}
       </button>
     </form>
   );
