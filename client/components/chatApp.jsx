@@ -29,14 +29,10 @@ export function ChatApp() {
   const navigate = useNavigate();
   const [finalText, setfinalText] = useState();
   const [username, setUsername] = useState("");
-  const [userToVisit, setUserToVisit] = useState("");
 
   const [addButtonPressed, setAddButtonPressed] = useState(false);
 
   const clientRef = useRef(null);
-  const usernameRef = useRef(null);
-
-  // console.log(`I just signed in with the username ${username}`);
 
   useEffect(() => {
     async function userIsOnline() {
@@ -72,9 +68,8 @@ export function ChatApp() {
       client.emit("join-room", { username: username });
 
       client.on("message", (msg) => {
+        console.log(`sender was ${msg.sender}`);
         setMessages((prev) => [...prev, msg]);
-
-        client.on("visit-branch", { username: userToVisit });
       });
     });
 
@@ -106,7 +101,7 @@ export function ChatApp() {
         <ChatList />
         <ChatWindow>
           <MessageContainer>
-            <Message messages={messages} />
+            <Message messages={messages} username={username} />
           </MessageContainer>
           <InputContainer>
             <AttachmentButton />

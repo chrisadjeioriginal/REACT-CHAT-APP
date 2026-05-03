@@ -5,6 +5,7 @@ import { Server } from "socket.io";
 import http from "http";
 import cookieParser from "cookie-parser";
 import { randomUUID } from "crypto";
+import { cp } from "fs";
 
 async function checkIfUserExists(username) {
   const AllUsersData = await fs.readFile("../database.txt", "utf-8");
@@ -47,21 +48,15 @@ io.on("connection", (client) => {
     console.log(`client has been added to room ${data.username}`);
   });
 
-  //   client.on("message", (msg) => {
-  //     console.log(`client sent the message: ${msg}`);
-  //     client.emit("message", msg);
-  //   });
+  client.on("message", (msg) => {
+    console.log(`client sent the message: ${msg}`);
+    const myCookie = client.request.headers.cookie.split("=")[1];
 
-  //   client.on("visit-branch", (data) => {
-  //     if (checkIfUserExists(data.username)) {
-  //       client.join(data.username);
-  //     } else {
-  //       console.log("user does not exist");
-  //     }
-  //   });
+    msg.sender = sessions[myCookie];
 
-  client.on("message", (data) => {
-    io.to(data.username).emit("message", data);
+    console.log(msg.content);
+    console.log(msg.sender);
+    io.emit("message", msg);
   });
 });
 
@@ -104,7 +99,7 @@ app.post("/Login", async (req, res) => {
           res.cookie("Id", uniqueId, {
             httpOnly: true,
             secure: true,
-            maxAge: 100000,
+            maxAge: 1000000,
           });
 
           return res.json({
