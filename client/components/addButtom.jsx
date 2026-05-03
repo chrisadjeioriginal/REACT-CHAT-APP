@@ -1,4 +1,8 @@
-export function AddButton() {
+export function AddButton({ setAddButtonPressed }) {
+  function pressAddButton() {
+    setAddButtonPressed(true);
+  }
+
   const style = {
     width: "60px",
     height: "60px",
@@ -13,5 +17,9 @@ export function AddButton() {
     cursor: "pointer",
     backgroundColor: "none",
   };
-  return <button style={style}>+</button>;
+  return (
+    <button style={style} onClick={pressAddButton}>
+      +
+    </button>
+  );
 }

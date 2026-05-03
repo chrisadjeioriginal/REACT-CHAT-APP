@@ -3,7 +3,7 @@ import { LogInLogo } from "./LoginLogo";
 import { Link } from "react-router-dom";
 import image from "../assets/flowers2.png";
 
-export function LogIn({ children }) {
+export function LogIn({ children, setUsername }) {
   const style = {
     width: "400px",
     height: "460px",
@@ -30,7 +30,7 @@ export function LogIn({ children }) {
   return (
     <div style={style}>
       <LogInLogo />
-      <LoginForm />
+      <LoginForm setUsername={setUsername} />
       <Link to="/SignUp">
         <p style={linkStyle}>Sign Up</p>
       </Link>

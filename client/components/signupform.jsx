@@ -13,7 +13,10 @@ export function SignUpForm() {
     const response = await axios.post("http://localhost:3000/Register", values);
 
     if (response.data.success) {
+      console.log(response.data.message);
       navigate("/");
+    } else {
+      console.log(response.data.message);
     }
   }
 

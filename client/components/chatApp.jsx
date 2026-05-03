@@ -9,17 +9,98 @@ import { AttachmentButton } from "./attachment-button.jsx";
 import { Header } from "./header.jsx";
 import { SubContainer } from "./sub-container.jsx";
 import { AddButton } from "./addButtom.jsx";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Message } from "./message.jsx";
+import { io } from "socket.io-client";
+import { UsernameHolder } from "./username-holder.jsx";
+import { SearchBox } from "./searchbox.jsx";
+import { SearchBar } from "./searchBox-searchbar.jsx";
+import { SearchBoxMessageHolder } from "./searchBoxMessageHolder.jsx";
+import { SearchBoxCloseButton } from "./searchBoxCloseButton.jsx";
+import { SearchBoxSearchButton } from "./searchBox-searchButton.jsx";
+
+// import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export function ChatApp() {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
+  const navigate = useNavigate();
+  const [finalText, setfinalText] = useState();
+  const [username, setUsername] = useState("");
+  const [userToVisit, setUserToVisit] = useState("");
+
+  const [addButtonPressed, setAddButtonPressed] = useState(false);
+
+  const clientRef = useRef(null);
+  const usernameRef = useRef(null);
+
+  // console.log(`I just signed in with the username ${username}`);
+
+  useEffect(() => {
+    async function userIsOnline() {
+      try {
+        const res = await axios.get("http://localhost:3000/Online", {
+          withCredentials: true,
+        });
+
+        if (!res.data.success) {
+          navigate("/");
+        } else {
+          setUsername(res.data.userId);
+        }
+      } catch (err) {
+        navigate("/");
+      }
+    }
+
+    userIsOnline();
+  }, []);
+
+  useEffect(() => {
+    if (!username) {
+      return;
+    }
+    const client = io("http://localhost:3000", { withCredentials: true });
+
+    clientRef.current = client;
+
+    client.on("connect", () => {
+      console.log("I have connected from react front end");
+
+      client.emit("join-room", { username: username });
+
+      client.on("message", (msg) => {
+        setMessages((prev) => [...prev, msg]);
+
+        client.on("visit-branch", { username: userToVisit });
+      });
+    });
+
+    return () => client.disconnect();
+  }, [username]);
+
+  useEffect(() => {
+    if (!finalText) {
+      return;
+    }
+    clientRef.current.emit("message", finalText);
+  }, [finalText]);
 
   return (
     <MainContainer>
+      {addButtonPressed && (
+        <SearchBox>
+          <SearchBoxCloseButton setAddButtonPressed={setAddButtonPressed} />
+          <SearchBoxMessageHolder />
+          <SearchBar />
+          <SearchBoxSearchButton />
+        </SearchBox>
+      )}
+      <UsernameHolder username={username} />
       <Header>
-        <AddButton />
+        <AddButton setAddButtonPressed={setAddButtonPressed} />
       </Header>
       <SubContainer>
         <ChatList />
@@ -35,6 +116,7 @@ export function ChatApp() {
               text={text}
               setText={setText}
               messages={messages}
+              setfinalText={setfinalText}
             />
           </InputContainer>
         </ChatWindow>

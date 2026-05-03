@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export function LoginForm() {
+export function LoginForm({ setUsername }) {
   const navigate = useNavigate();
   async function gatherFormData(e) {
     e.preventDefault();
@@ -9,9 +9,18 @@ export function LoginForm() {
 
     const values = Object.fromEntries(data.entries());
 
-    const response = await axios.post("http://localhost:3000/Login", values);
+    const response = await axios.post("http://localhost:3000/Login", values, {
+      withCredentials: true,
+    });
     if (response.data.success) {
+      console.log(`this is the data ${response.data}`);
+      // console.log("login 2026 was a success");
+      // setUsername(response.data.userId);
+      // setIsOnline(true);
+      localStorage.setItem("username", response.data.userId);
       navigate("/ChatApp");
+    } else {
+      console.log(response.data.message);
     }
   }
 

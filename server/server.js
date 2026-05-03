@@ -41,6 +41,7 @@ const io = new Server(server, {
 io.on("connection", (client) => {
   //   console.log(`client with id ${client.id} has connected`);
 
+  // Remember to authenticate users before adding them to a room
   client.on("join-room", (data) => {
     client.join(`${data.username}`);
     console.log(`client has been added to room ${data.username}`);
@@ -51,13 +52,13 @@ io.on("connection", (client) => {
   //     client.emit("message", msg);
   //   });
 
-  client.on("visit-branch", (data) => {
-    if (checkIfUserExists(data.username)) {
-      client.join(data.username);
-    } else {
-      console.log("user does not exist");
-    }
-  });
+  //   client.on("visit-branch", (data) => {
+  //     if (checkIfUserExists(data.username)) {
+  //       client.join(data.username);
+  //     } else {
+  //       console.log("user does not exist");
+  //     }
+  //   });
 
   client.on("message", (data) => {
     io.to(data.username).emit("message", data);
