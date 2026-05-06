@@ -13,6 +13,7 @@ export function SearchBox({ children }) {
     top: "50%",
     transform: "translate(-50%,-50%)",
     border: "4px solid rgb(69, 67, 67)",
+    zIndex: 1,
   };
   return <div style={style}>{children}</div>;
 }

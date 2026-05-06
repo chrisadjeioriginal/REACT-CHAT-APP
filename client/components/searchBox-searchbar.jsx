@@ -1,4 +1,8 @@
-export function SearchBar() {
+export function SearchBar({ searchBoxText, setSearchBoxText }) {
+  function getText(e) {
+    setSearchBoxText(e.target.value);
+  }
+
   const style = {
     width: "300px",
     height: "20px",
@@ -11,6 +15,8 @@ export function SearchBar() {
   };
   return (
     <input
+      value={searchBoxText}
+      onChange={getText}
       style={style}
       placeholder="Example: Chrisadjeioriginal2@yahoo.com"
     ></input>

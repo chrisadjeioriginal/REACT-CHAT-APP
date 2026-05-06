@@ -18,8 +18,8 @@ import { SearchBar } from "./searchBox-searchbar.jsx";
 import { SearchBoxMessageHolder } from "./searchBoxMessageHolder.jsx";
 import { SearchBoxCloseButton } from "./searchBoxCloseButton.jsx";
 import { SearchBoxSearchButton } from "./searchBox-searchButton.jsx";
+import { FriendsHolder } from "./friendsHolder.jsx";
 
-// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -31,6 +31,10 @@ export function ChatApp() {
   const [username, setUsername] = useState("");
 
   const [addButtonPressed, setAddButtonPressed] = useState(false);
+
+  const [searchBoxText, setSearchBoxText] = useState("");
+  // const [finalsearchBoxText, setFinalSearchBoxText] = useState("");
+  const [friendsList, setFriendsList] = useState([]);
 
   const clientRef = useRef(null);
 
@@ -83,14 +87,34 @@ export function ChatApp() {
     clientRef.current.emit("message", finalText);
   }, [finalText]);
 
+  useEffect(() => {
+    async function getFriends() {
+      const response = await axios.get("http://localhost:3000/Friends", {
+        withCredentials: true,
+      });
+
+      if (response.data.friendsInfo) {
+        setFriendsList(response.data.friendsInfo);
+      }
+    }
+    getFriends();
+  });
+
   return (
     <MainContainer>
       {addButtonPressed && (
         <SearchBox>
           <SearchBoxCloseButton setAddButtonPressed={setAddButtonPressed} />
           <SearchBoxMessageHolder />
-          <SearchBar />
-          <SearchBoxSearchButton />
+          <SearchBar
+            setSearchBoxText={setSearchBoxText}
+            searchBoxText={searchBoxText}
+          />
+          <SearchBoxSearchButton
+            searchBoxText={searchBoxText}
+            setSearchBoxText={setSearchBoxText}
+            setFriendsList={setFriendsList}
+          />
         </SearchBox>
       )}
       <UsernameHolder username={username} />
@@ -98,7 +122,9 @@ export function ChatApp() {
         <AddButton setAddButtonPressed={setAddButtonPressed} />
       </Header>
       <SubContainer>
-        <ChatList />
+        <ChatList>
+          <FriendsHolder friendsList={friendsList} />
+        </ChatList>
         <ChatWindow>
           <MessageContainer>
             <Message messages={messages} username={username} />
