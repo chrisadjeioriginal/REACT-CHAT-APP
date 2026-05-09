@@ -128,8 +128,8 @@ app.post("/api/Login", async (req, res) => {
             httpOnly: true,
 
             maxAge: 1000000,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: "none",
           });
 
           return res.json({
