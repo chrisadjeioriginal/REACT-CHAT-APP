@@ -30,12 +30,6 @@ async function checkIfUserExists(username) {
 
 const sessions = {};
 
-const app = express();
-app.use(express.json());
-app.use(cookieParser());
-
-// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-
 app.use(
   cors({
     origin: [
@@ -46,6 +40,12 @@ app.use(
     credentials: true,
   }),
 ); // when using ngrok, use this
+
+const app = express();
+app.use(express.json());
+app.use(cookieParser());
+
+// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 const server = http.createServer(app);
 
