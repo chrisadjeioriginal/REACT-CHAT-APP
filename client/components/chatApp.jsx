@@ -36,7 +36,16 @@ export function ChatApp() {
   // const [finalsearchBoxText, setFinalSearchBoxText] = useState("");
   const [friendsList, setFriendsList] = useState([]);
 
+  const [recipient, setRecipient] = useState("");
+
+  const [convoId, setConvoId] = useState("");
+
+  const [messageStore, setMessageStore] = useState([]);
+
+  const [friendsLookup, setFriendsLookup] = useState({});
+
   const clientRef = useRef(null);
+  const friendsLookUpRef = useRef({});
 
   useEffect(() => {
     async function userIsOnline() {
@@ -72,8 +81,46 @@ export function ChatApp() {
       client.emit("join-room", { username: username });
 
       client.on("message", (msg) => {
+        console.log(`message being added to message store is: ${msg.content}`);
         console.log(`sender was ${msg.sender}`);
-        setMessages((prev) => [...prev, msg]);
+        setMessageStore((prev) => [...prev, msg]);
+
+        // console.log("HEYYYYYY");
+        // console.log(friendsLookup[msg.sender]);
+
+        if (!friendsLookUpRef.current[msg.sender] && msg.sender !== username) {
+          async function AddToFriendsList() {
+            try {
+              console.log("ABOUT TO SEND REQUEST");
+              const response = await axios.post(
+                "http://localhost:3000/Users",
+                {
+                  friendName: msg.sender,
+                  convoId: msg.convoId,
+                  myName: username,
+                },
+                { withCredentials: true },
+              );
+
+              if (response.data.success) {
+                setFriendsList((prev) => [
+                  ...prev,
+                  { convoId: msg.convoId, friend: msg.sender },
+                ]);
+
+                setFriendsLookup((prev) => {
+                  if (prev[msg.sender] || msg.sender === username) return prev;
+
+                  return { ...prev, [msg.sender]: true };
+                });
+              }
+            } catch (error) {
+              console.log("couldnt add friend");
+              console.log("YES YOU!!");
+            }
+          }
+          AddToFriendsList();
+        }
       });
     });
 
@@ -88,17 +135,58 @@ export function ChatApp() {
   }, [finalText]);
 
   useEffect(() => {
+    if (!username) return;
     async function getFriends() {
-      const response = await axios.get("http://localhost:3000/Friends", {
-        withCredentials: true,
-      });
+      // console.log("ABOUT TO SEND REQUEST");
+      const response = await axios.post(
+        "http://localhost:3000/Friends",
+        { myName: username },
+        {
+          withCredentials: true,
+        },
+      );
 
-      if (response.data.friendsInfo) {
+      if (response.data.friendsInfo.length > 0) {
         setFriendsList(response.data.friendsInfo);
+        setConvoId(response.data.friendsInfo[0].convoId);
+
+        setFriendsLookup((prev) => {
+          const updatedLookup = { ...prev };
+
+          response.data.friendsInfo.forEach((item) => {
+            updatedLookup[item.friend] = true;
+          });
+
+          // console.log("UPDATED LOOKUP:", updatedLookup);
+
+          return updatedLookup;
+        });
       }
     }
+
     getFriends();
-  });
+  }, [username]);
+
+  useEffect(() => {
+    async function getMessages() {
+      try {
+        const response = await axios.get("http://localhost:3000/Messages", {
+          withCredentials: true,
+        });
+
+        if (response.data.allMessages) {
+          setMessageStore(response.data.allMessages);
+        }
+      } catch (err) {
+        console.log("ERROR WHILE RETRIEVING MESSAGES");
+      }
+    }
+    getMessages();
+  }, []);
+
+  useEffect(() => {
+    friendsLookUpRef.current = friendsLookup;
+  }, [friendsLookup]);
 
   return (
     <MainContainer>
@@ -114,6 +202,9 @@ export function ChatApp() {
             searchBoxText={searchBoxText}
             setSearchBoxText={setSearchBoxText}
             setFriendsList={setFriendsList}
+            setConvoId={setConvoId}
+            setRecipient={setRecipient}
+            username={username}
           />
         </SearchBox>
       )}
@@ -123,11 +214,24 @@ export function ChatApp() {
       </Header>
       <SubContainer>
         <ChatList>
-          <FriendsHolder friendsList={friendsList} />
+          <FriendsHolder
+            friendsList={friendsList}
+            setRecipient={setRecipient}
+            setMessages={setMessages}
+            messageStore={messageStore}
+            setConvoId={setConvoId}
+            convoId={convoId}
+          />
         </ChatList>
         <ChatWindow>
           <MessageContainer>
-            <Message messages={messages} username={username} />
+            <Message
+              // messages={messages}
+              username={username}
+              messageStore={messageStore}
+              // recipient={recipient}
+              convoId={convoId}
+            />
           </MessageContainer>
           <InputContainer>
             <AttachmentButton />
@@ -138,6 +242,9 @@ export function ChatApp() {
               setText={setText}
               messages={messages}
               setfinalText={setfinalText}
+              convoId={convoId}
+              username={username}
+              recipient={recipient}
             />
           </InputContainer>
         </ChatWindow>

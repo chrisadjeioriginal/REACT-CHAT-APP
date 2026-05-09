@@ -5,8 +5,6 @@ import { Server } from "socket.io";
 import http from "http";
 import cookieParser from "cookie-parser";
 import { randomUUID } from "crypto";
-import { connect } from "http2";
-import { json } from "stream/consumers";
 
 async function checkIfUserExists(username) {
   try {
@@ -14,10 +12,13 @@ async function checkIfUserExists(username) {
 
     AllUsersData = AllUsersData.split("\n");
 
-    for (const user of AllUsersData) {
-      const uniueUser = user.split(" ")[0];
+    console.log("these are all the users", AllUsersData);
 
-      if (uniueUser.toLowerCase() === username.toLowerCase().trim()) {
+    for (const userData of AllUsersData) {
+      const user = userData.split(" ")[0];
+
+      if (user.toLowerCase().trim() === username.toLowerCase().trim()) {
+        console.log(`yes the friend with username :${username} exists`);
         return true;
       }
     }
@@ -50,12 +51,20 @@ io.on("connection", (client) => {
     // console.log(`client has been added to room ${data.username}`);
   });
 
-  client.on("message", (msg) => {
-    const myCookie = client.request.headers.cookie.split("=")[1];
+  client.on("message", async (msg) => {
+    // const myCookie = client.request.headers.cookie.split("=")[1];
 
-    msg.sender = sessions[myCookie];
+    // msg.sender = sessions[myCookie];
+    try {
+      //   console.log(`${msg.sender} sent a message to ${msg.recipient}`);
+      const path = "../messages.txt";
+      await fs.appendFile(path, JSON.stringify(msg) + "\n");
 
-    io.emit("message", msg);
+      io.to(msg.sender).emit("message", msg);
+      io.to(msg.recipient).emit("message", msg);
+    } catch (error) {
+      console.log("MESSAGE COULD NOT BE SAVED");
+    }
   });
 });
 
@@ -96,8 +105,10 @@ app.post("/Login", async (req, res) => {
           sessions[uniqueId] = username;
           res.cookie("Id", uniqueId, {
             httpOnly: true,
-            secure: true,
+
             maxAge: 1000000,
+            secure: false,
+            sameSite: "lax",
           });
 
           return res.json({
@@ -119,21 +130,33 @@ app.post("/Register", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  try {
-    const path = "../database.txt";
+  const path = "../database.txt";
 
+  try {
     const result = await fs.readFile(path, "utf-8");
 
     if (!result) {
       try {
+        const new_directory = `../conversations/${username}`;
+        await fs.mkdir(new_directory);
+        await fs.writeFile(
+          `../conversations/${username}/conversations.txt`,
+          "",
+        );
+        await fs.writeFile(
+          `../conversations/${username}/LastInteraction.txt`,
+          "",
+        );
+
         await fs.writeFile(path, username + " " + password);
-        res.json({ success: true });
+        return res.json({ success: true, message: "Registration successful" });
       } catch (err) {
         return res
           .status(500)
           .json({ success: false, message: "Unable to register user" });
       }
     } else {
+      console.log("CHECKING THIS NEIGHBOURHOOD OUT ");
       const allUsers = result.split("\n");
 
       for (const user of allUsers) {
@@ -145,6 +168,15 @@ app.post("/Register", async (req, res) => {
       }
 
       try {
+        await fs.mkdir(`../conversations/${username}`);
+        await fs.writeFile(
+          `../conversations/${username}/conversations.txt`,
+          "",
+        );
+        await fs.writeFile(
+          `../conversations/${username}/LastInteraction.txt`,
+          "",
+        );
         await fs.appendFile(path, "\n" + username + " " + password);
         return res.json({ success: true, message: "Registration successful" });
       } catch (err) {
@@ -158,12 +190,12 @@ app.post("/Register", async (req, res) => {
   }
 });
 
-async function IsFriend(username, myName) {
-  const path = "../conversations.txt";
+async function IsFriend(friendName, myName) {
+  const path = `../conversations/${myName}/conversations.txt`;
 
-  if (username === myName) {
+  if (friendName === myName) {
     console.log("cannot befriend yourself");
-    return true;
+    return "IS SELF";
   }
 
   try {
@@ -176,22 +208,11 @@ async function IsFriend(username, myName) {
     for (const convo of myConvos) {
       const conv = JSON.parse(convo);
 
-      if (
-        conv.participants.includes(username) &&
-        conv.participants.includes(myName)
-      ) {
+      if (conv.friend === friendName) {
         return true;
       }
     }
-
-    const newEntry = {
-      participants: [myName, username].sort(),
-      convoId: randomUUID(),
-      friend: username,
-    };
-
-    await fs.appendFile(path, JSON.stringify(newEntry) + "\n");
-
+    console.log("CHECKIN OUT THE AREa");
     return false;
   } catch (err) {
     console.log("REAL ERROR:", err);
@@ -201,19 +222,39 @@ async function IsFriend(username, myName) {
 
 app.post("/Users", async (req, res) => {
   //   console.log("someone came here");
-  const username = req.body.username;
+
   //   console.log(`user is looking for friend with name ${username}`);
 
   try {
-    const myName = sessions[req.cookies.Id];
+    const friendName = req.body.friendName;
+    const myName = req.body.myName;
     // console.log("my name is ", myName);
-    const result = await IsFriend(username, myName);
-    if ((await checkIfUserExists(username)) && result === false) {
-      //   console.log("found them!!!");
+
+    const path = `../conversations/${myName}/conversations.txt`;
+    const userIsMyFriend = await IsFriend(friendName, myName);
+
+    // console.log(
+    //   `the check for if they person was my friend returned ${userIsMyFriend}`,
+    // );
+
+    const userExists = await checkIfUserExists(friendName);
+
+    // console.log(`the check for if they person exists returned ${userExists}`);
+
+    if (userExists === true && userIsMyFriend === false) {
+      const newEntry = {
+        participants: [myName, friendName].sort(),
+        convoId: req.body.convoId ? req.body.convoId : randomUUID(),
+        friend: friendName,
+      };
+
+      await fs.appendFile(path, JSON.stringify(newEntry) + "\n");
+
       return res.json({
         success: true,
-        username: username,
+        friendName: friendName,
         message: "new friend added",
+        convoId: newEntry.convoId,
       });
     } else {
       return res.json({ success: false, message: "user not found!" });
@@ -225,17 +266,31 @@ app.post("/Users", async (req, res) => {
   }
 });
 
-app.get("/Friends", async (req, res) => {
-  let myFriends = await fs.readFile("../conversations.txt", "utf-8");
+app.post("/Friends", async (req, res) => {
+  const myName = req.body.myName;
+
+  const path = `../conversations/${myName}/conversations.txt`;
+  let myFriends = await fs.readFile(path, "utf-8");
 
   myFriends = myFriends.split("\n").filter((line) => line.trim() !== "");
-  //   console.log("my friends data ", myFriends);
 
   myFriends = myFriends
     .filter((line) => line.trim() !== "")
     .map((line) => JSON.parse(line));
 
   return res.json({ friendsInfo: myFriends });
+});
+
+app.get("/Messages", async (req, res) => {
+  let allMessages = await fs.readFile("../messages.txt", "utf-8");
+
+  allMessages = allMessages.split("\n").filter((line) => line.trim() !== "");
+
+  allMessages = allMessages
+    .filter((line) => line.trim() !== "")
+    .map((line) => JSON.parse(line));
+
+  return res.json({ allMessages: allMessages });
 });
 
 server.listen(3000, () => {

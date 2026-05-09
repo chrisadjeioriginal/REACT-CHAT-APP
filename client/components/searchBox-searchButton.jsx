@@ -4,20 +4,31 @@ export function SearchBoxSearchButton({
   searchBoxText,
   setSearchBoxText,
   setFriendsList,
+  setRecipient,
+  setConvoId,
+  username,
 }) {
   async function search() {
     try {
       console.log(`this is the input ${searchBoxText}`);
       const res = await axios.post(
         "http://localhost:3000/Users",
-        { username: searchBoxText },
+        { friendName: searchBoxText, myName: username },
         { withCredentials: true },
       );
 
       if (res.data.success) {
+        console.log(res.data);
         console.log(res.data.message);
-        setFriendsList((prev) => [...prev, res.data.username]);
+
+        setFriendsList((prev) => [
+          ...prev,
+          { convoId: res.data.convoId, friend: res.data.friendName },
+        ]);
+
         setSearchBoxText("");
+        setRecipient(res.data.friendName);
+        setConvoId(res.data.convoId);
       } else {
         console.log(res.data.message);
       }

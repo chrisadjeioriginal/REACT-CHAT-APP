@@ -1,9 +1,13 @@
-export function Message({ messages, username }) {
+export function Message({ username, messageStore, convoId }) {
+  // console.log("the recipient is ", recipient);
+  const display = messageStore.filter((msg) => msg.convoId === convoId);
+  // console.log(display);
+
   return (
     <>
-      {messages.map((message) => (
+      {display.map((msg, i) => (
         <p
-          key={message.id}
+          key={i}
           style={{
             backgroundColor: "rgb(179, 252, 83)",
             position: "relative",
@@ -14,17 +18,17 @@ export function Message({ messages, username }) {
             width: "fit-content",
             maxWidth: "45%",
             justifyContent: "right",
-            alignSelf: message.sender === username ? "flex-end" : "flex-start",
+            alignSelf: msg.sender === username ? "flex-end" : "flex-start",
             padding: "5px",
             // marginRight: "10px",
             borderRadius: "10px",
             wordBreak: "break-word",
             fontFamily: "Arial",
             fontSize: "25px",
-            left: message.sender === username ? "-10px" : "10px",
+            left: msg.sender === username ? "-10px" : "10px",
           }}
         >
-          {message.content}
+          {msg.content}
         </p>
       ))}
     </>

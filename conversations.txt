@@ -1,5 +1,0 @@
-
-{"participants":["chris","sandy"],"convoId":"8478e4ac-20be-438a-b8df-d5e5a32f5067","friend":"sandy"}
-{"participants":["chris","derek"],"convoId":"6efe66b2-67f2-44ad-b2e9-95368197384c","friend":"derek"}
-{"participants":["700","chris"],"convoId":"b1298208-c61d-440e-96e9-6530f25cab40","friend":"700"}
-{"participants":["Ronny","chris"],"convoId":"46d72834-47c7-4d99-a805-ce3ba0c74a68","friend":"Ronny"}

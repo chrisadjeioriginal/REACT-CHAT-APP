@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export function LoginForm({ setUsername }) {
+export function LoginForm() {
   const navigate = useNavigate();
 
   async function gatherFormData(e) {
