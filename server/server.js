@@ -154,10 +154,10 @@ app.post("/api/Login", async (req, res) => {
 
           sessions[uniqueId] = username;
 
-          await fs.appendFile(
-            "../authenticated.txt",
-            username + " " + uniqueId + "\n",
-          );
+          // await fs.appendFile(
+          //   "../authenticated.txt",
+          //   username + " " + uniqueId + "\n",
+          // );
 
           res.cookie("Id", uniqueId, {
             httpOnly: true,
