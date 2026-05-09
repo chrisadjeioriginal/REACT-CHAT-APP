@@ -35,7 +35,8 @@ const app = express();
 app.use(
   cors({
     // origin: ["http://localhost:5173"],
-    origin: "*",
+    // origin: "*",
+    origin: ["https://react-chat-app-eta-one.vercel.app"],
     credentials: true,
   }),
 ); // when using ngrok, use this
@@ -59,7 +60,8 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     // origin: ["http://localhost:5173"],
-    origin: "*",
+    // origin: "*",
+    origin: ["https://react-chat-app-eta-one.vercel.app"],
     credentials: true,
   },
 });
