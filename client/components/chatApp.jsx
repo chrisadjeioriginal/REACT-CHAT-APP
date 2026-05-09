@@ -50,9 +50,12 @@ export function ChatApp() {
   useEffect(() => {
     async function userIsOnline() {
       try {
-        const res = await axios.get("/api/Online", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://playmaker-sushi-divinely.ngrok-free.dev/api/Online",
+          {
+            withCredentials: true,
+          },
+        );
 
         if (!res.data.success) {
           navigate("/");
@@ -71,7 +74,9 @@ export function ChatApp() {
     if (!username) {
       return;
     }
-    const client = io("http://localhost:3000", { withCredentials: true });
+    const client = io("https://playmaker-sushi-divinely.ngrok-free.dev", {
+      withCredentials: true,
+    });
     // const client = io("/", { withCredentials: true });
 
     clientRef.current = client;
@@ -94,7 +99,7 @@ export function ChatApp() {
             try {
               console.log("ABOUT TO SEND REQUEST");
               const response = await axios.post(
-                "/api/Users",
+                "https://playmaker-sushi-divinely.ngrok-free.dev/api/Users",
 
                 {
                   friendName: msg.sender,
@@ -141,7 +146,7 @@ export function ChatApp() {
     async function getFriends() {
       // console.log("ABOUT TO SEND REQUEST");
       const response = await axios.post(
-        "/api/Friends",
+        "https://playmaker-sushi-divinely.ngrok-free.dev/api/Friends",
 
         { myName: username },
         {
@@ -173,9 +178,12 @@ export function ChatApp() {
   useEffect(() => {
     async function getMessages() {
       try {
-        const response = await axios.get("/api/Messages", {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "https://playmaker-sushi-divinely.ngrok-free.dev/api/Messages",
+          {
+            withCredentials: true,
+          },
+        );
 
         if (response.data.allMessages) {
           setMessageStore(response.data.allMessages);

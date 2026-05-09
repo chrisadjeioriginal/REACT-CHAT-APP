@@ -12,7 +12,7 @@ export function SearchBoxSearchButton({
     try {
       console.log(`this is the input ${searchBoxText}`);
       const res = await axios.post(
-        "/api/Users",
+        "https://playmaker-sushi-divinely.ngrok-free.dev/api/Users",
         { friendName: searchBoxText, myName: username },
         { withCredentials: true },
       );
