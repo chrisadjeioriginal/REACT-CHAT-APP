@@ -44,7 +44,7 @@ app.use(
   }),
 ); // when using ngrok, use this
 
-app.options("*", cors());
+app.options(/.*/, cors());
 
 app.use(express.json());
 app.use(cookieParser());
