@@ -30,6 +30,8 @@ async function checkIfUserExists(username) {
 
 const sessions = {};
 
+const app = express();
+
 app.use(
   cors({
     origin: [
@@ -41,7 +43,6 @@ app.use(
   }),
 ); // when using ngrok, use this
 
-const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
