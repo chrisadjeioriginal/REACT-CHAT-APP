@@ -10,7 +10,8 @@ export function SignUpForm() {
     const values = Object.fromEntries(data.entries());
     console.log(values);
 
-    const response = await axios.post("http://localhost:3000/Register", values);
+    // const response = await axios.post("http://localhost:3000/Register", values);
+    const response = await axios.post("/api/Register", values);
 
     if (response.data.success) {
       console.log(response.data.message);

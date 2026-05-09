@@ -1,1 +1,0 @@
-{"participants":["george","sandy"],"convoId":"81fd3fb9-150d-416a-805f-d82d8a6990b1","friend":"sandy"}

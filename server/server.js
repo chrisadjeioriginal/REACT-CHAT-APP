@@ -34,13 +34,35 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+app.use(
+  cors({
+    origin: [
+      "https://playmaker-sushi-divinely.ngrok-free.dev",
+      "http://localhost:5173",
+      "https://react-chat-f52wlaojx-chris-adjei-s-projects.vercel.app/",
+    ],
+    credentials: true,
+  }),
+); // when using ngrok, use this
 
 const server = http.createServer(app);
 
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:5173",
+//     credentials: true,
+//   },
+// });
+
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+      "https://playmaker-sushi-divinely.ngrok-free.dev",
+      "http://localhost:5173",
+      "https://react-chat-f52wlaojx-chris-adjei-s-projects.vercel.app/",
+    ],
     credentials: true,
   },
 });
@@ -68,7 +90,7 @@ io.on("connection", (client) => {
   });
 });
 
-app.get("/Online", (req, res) => {
+app.get("/api/Online", (req, res) => {
   if (!sessions[req.cookies.Id]) {
     res.json({ success: false, message: "User needs to log in!" });
   } else {
@@ -80,7 +102,7 @@ app.get("/Online", (req, res) => {
   }
 });
 
-app.post("/Login", async (req, res) => {
+app.post("/api/Login", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -126,7 +148,7 @@ app.post("/Login", async (req, res) => {
   }
 });
 
-app.post("/Register", async (req, res) => {
+app.post("/api/Register", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -220,7 +242,7 @@ async function IsFriend(friendName, myName) {
   }
 }
 
-app.post("/Users", async (req, res) => {
+app.post("/api/Users", async (req, res) => {
   //   console.log("someone came here");
 
   //   console.log(`user is looking for friend with name ${username}`);
@@ -266,7 +288,7 @@ app.post("/Users", async (req, res) => {
   }
 });
 
-app.post("/Friends", async (req, res) => {
+app.post("/api/Friends", async (req, res) => {
   const myName = req.body.myName;
 
   const path = `../conversations/${myName}/conversations.txt`;
@@ -281,7 +303,7 @@ app.post("/Friends", async (req, res) => {
   return res.json({ friendsInfo: myFriends });
 });
 
-app.get("/Messages", async (req, res) => {
+app.get("/api/Messages", async (req, res) => {
   let allMessages = await fs.readFile("../messages.txt", "utf-8");
 
   allMessages = allMessages.split("\n").filter((line) => line.trim() !== "");
