@@ -58,6 +58,7 @@ export function ChatApp() {
         );
 
         if (!res.data.success) {
+          console.log("VERIFIED USER SUCCESSFULLY");
           navigate("/");
         } else {
           setUsername(res.data.userId);
