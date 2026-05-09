@@ -28,6 +28,31 @@ async function checkIfUserExists(username) {
   }
 }
 
+async function isAuthenticated(UsersCookie) {
+  try {
+    let AllAuthenticatedUsers = await fs.readFile(
+      "../authenticated.txt",
+      "utf-8",
+    );
+
+    AllAuthenticatedUsers = AllAuthenticatedUsers.split("\n");
+
+    // console.log("these are all the users", AllUsersData);
+
+    for (const userData of AllAuthenticatedUsers) {
+      const cookie = userData.split(" ")[1];
+
+      if (cookie === UsersCookie) {
+        console.log(`yes user is authenticated`);
+        return true;
+      }
+    }
+    return false;
+  } catch (err) {
+    return false;
+  }
+}
+
 const sessions = {};
 
 const app = express();
@@ -93,7 +118,8 @@ io.on("connection", (client) => {
 
 app.get("/api/Online", (req, res) => {
   console.log("Cookies:", req.cookies);
-  if (!sessions[req.cookies.Id]) {
+
+  if (!isAuthenticated(req.cookies.Id)) {
     res.json({ success: false, message: "User needs to log in!" });
   } else {
     res.json({
@@ -127,6 +153,12 @@ app.post("/api/Login", async (req, res) => {
           const uniqueId = randomUUID();
 
           sessions[uniqueId] = username;
+
+          await fs.appendFile(
+            "../authenticated.txt",
+            username + " " + uniqueId + "\n",
+          );
+
           res.cookie("Id", uniqueId, {
             httpOnly: true,
 
