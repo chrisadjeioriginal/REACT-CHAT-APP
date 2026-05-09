@@ -34,17 +34,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "https://playmaker-sushi-divinely.ngrok-free.dev",
-      "http://localhost:5173",
-      "https://react-chat-f52wlaojx-chris-adjei-s-projects.vercel.app",
-      "https://react-chat-app-eta-one.vercel.app",
-    ],
+    origin: ["http://localhost:5173"],
     credentials: true,
   }),
 ); // when using ngrok, use this
 
-app.options(/.*/, cors());
+// app.options(/.*/, cors());
 
 app.use(express.json());
 app.use(cookieParser());
@@ -62,12 +57,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: [
-      "https://playmaker-sushi-divinely.ngrok-free.dev",
-      "http://localhost:5173",
-      "https://react-chat-f52wlaojx-chris-adjei-s-projects.vercel.app",
-      "https://react-chat-app-eta-one.vercel.app",
-    ],
+    origin: ["http://localhost:5173"],
     credentials: true,
   },
 });

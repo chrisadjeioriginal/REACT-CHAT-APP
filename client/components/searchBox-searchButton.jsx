@@ -11,17 +11,17 @@ export function SearchBoxSearchButton({
   async function search() {
     try {
       console.log(`this is the input ${searchBoxText}`);
-      // const res = await axios.post(
-      //   "http://localhost:3000/Users",
-      //   { friendName: searchBoxText, myName: username },
-      //   { withCredentials: true },
-      // );
-
       const res = await axios.post(
         "/api/Users",
         { friendName: searchBoxText, myName: username },
         { withCredentials: true },
       );
+
+      // const res = await axios.post(
+      //   "/api/Users",
+      //   { friendName: searchBoxText, myName: username },
+      //   { withCredentials: true },
+      // );
 
       if (res.data.success) {
         console.log(res.data);

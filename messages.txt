@@ -1,0 +1,5 @@
+{"content":"hi","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"what's up?","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"nm u?","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"chillin' 😎","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"thats whats up","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}

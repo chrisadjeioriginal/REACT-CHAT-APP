@@ -50,16 +50,9 @@ export function ChatApp() {
   useEffect(() => {
     async function userIsOnline() {
       try {
-        // const res = await axios.get("http://localhost:3000/Online", {
-        //   withCredentials: true,
-        // });
-
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/Online`,
-          {
-            withCredentials: true,
-          },
-        );
+        const res = await axios.get("/api/Online", {
+          withCredentials: true,
+        });
 
         if (!res.data.success) {
           navigate("/");
@@ -78,11 +71,8 @@ export function ChatApp() {
     if (!username) {
       return;
     }
-    // const client = io("http://localhost:3000", { withCredentials: true });
+    const client = io("http://localhost:3000", { withCredentials: true });
     // const client = io("/", { withCredentials: true });
-    const client = io(`${import.meta.env.VITE_API_URL}`, {
-      withCredentials: true,
-    });
 
     clientRef.current = client;
 
@@ -104,8 +94,7 @@ export function ChatApp() {
             try {
               console.log("ABOUT TO SEND REQUEST");
               const response = await axios.post(
-                // "http://localhost:3000/Users",
-                `${import.meta.env.VITE_API_URL}/api/Users`,
+                "/api/Users",
 
                 {
                   friendName: msg.sender,
@@ -152,8 +141,8 @@ export function ChatApp() {
     async function getFriends() {
       // console.log("ABOUT TO SEND REQUEST");
       const response = await axios.post(
-        // "http://localhost:3000/Friends",
-        `${import.meta.env.VITE_API_URL}/api/Friends`,
+        "/api/Friends",
+
         { myName: username },
         {
           withCredentials: true,
@@ -184,15 +173,9 @@ export function ChatApp() {
   useEffect(() => {
     async function getMessages() {
       try {
-        // const response = await axios.get("http://localhost:3000/Messages", {
-        //   withCredentials: true,
-        // });
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/Messages`,
-          {
-            withCredentials: true,
-          },
-        );
+        const response = await axios.get("/api/Messages", {
+          withCredentials: true,
+        });
 
         if (response.data.allMessages) {
           setMessageStore(response.data.allMessages);

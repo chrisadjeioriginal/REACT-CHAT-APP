@@ -10,17 +10,13 @@ export function LoginForm() {
 
     const values = Object.fromEntries(data.entries());
 
-    // const response = await axios.post("http://localhost:3000/Login", values, {
+    const response = await axios.post("/api/Login", values, {
+      withCredentials: true,
+    });
+
+    // const response = await axios.post(`/api/Login`, values, {
     //   withCredentials: true,
     // });
-
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/Login`,
-      values,
-      {
-        withCredentials: true,
-      },
-    );
     if (response.data.success) {
       navigate("/ChatApp");
     } else {

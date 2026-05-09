@@ -1,1 +1,1 @@
-{"participants":["alfred","chris"],"convoId":"2b02ef5f-8a47-4502-a8ae-3075159999ec","friend":"chris"}
+{"participants":["alfred","chris"],"convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1","friend":"chris"}
