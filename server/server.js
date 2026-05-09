@@ -36,8 +36,9 @@ app.use(
   cors({
     // origin: ["http://localhost:5173"],
     // origin: "*",
-    origin: ["https://react-chat-app-eta-one.vercel.app"],
+    origin: "https://react-chat-app-eta-one.vercel.app",
     credentials: true,
+    methods: ["GET", "POST"],
   }),
 ); // when using ngrok, use this
 
@@ -61,8 +62,9 @@ const io = new Server(server, {
   cors: {
     // origin: ["http://localhost:5173"],
     // origin: "*",
-    origin: ["https://react-chat-app-eta-one.vercel.app"],
+    origin: "https://react-chat-app-eta-one.vercel.app",
     credentials: true,
+    methods: ["GET", "POST"],
   },
 });
 
@@ -90,6 +92,7 @@ io.on("connection", (client) => {
 });
 
 app.get("/api/Online", (req, res) => {
+  console.log("Cookies:", req.cookies);
   if (!sessions[req.cookies.Id]) {
     res.json({ success: false, message: "User needs to log in!" });
   } else {
