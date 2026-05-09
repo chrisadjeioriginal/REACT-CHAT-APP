@@ -10,9 +10,13 @@ export function LoginForm() {
 
     const values = Object.fromEntries(data.entries());
 
-    const response = await axios.post("/api/Login", values, {
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      "http://localhost:3000/api/Login",
+      values,
+      {
+        withCredentials: true,
+      },
+    );
 
     // const response = await axios.post(`/api/Login`, values, {
     //   withCredentials: true,
