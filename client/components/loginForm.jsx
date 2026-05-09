@@ -30,6 +30,7 @@ export function LoginForm() {
     //   withCredentials: true,
     // });
     if (response.data.success) {
+      localStorage.setItem("Username", response.data.userId);
       navigate("/ChatApp");
     } else {
       console.log(response.data.message);

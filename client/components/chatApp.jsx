@@ -48,27 +48,30 @@ export function ChatApp() {
   const friendsLookUpRef = useRef({});
 
   useEffect(() => {
-    async function userIsOnline() {
-      try {
-        const res = await axios.get(
-          "https://playmaker-sushi-divinely.ngrok-free.dev/api/Online",
-          {
-            withCredentials: true,
-          },
-        );
+    // async function userIsOnline() {
+    //   try {
+    //     const res = await axios.get(
+    //       "https://playmaker-sushi-divinely.ngrok-free.dev/api/Online",
+    //       {
+    //         withCredentials: true,
+    //       },
+    //     );
 
-        if (!res.data.success) {
-          console.log("VERIFIED USER SUCCESSFULLY");
-          navigate("/");
-        } else {
-          setUsername(res.data.userId);
-        }
-      } catch (err) {
-        navigate("/");
-      }
-    }
+    //     if (!res.data.success) {
+    //       console.log("failed to verify user");
+    //       navigate("/");
+    //     } else {
+    //       console.log("VERIFIED USER SUCCESSFULLY");
+    //       setUsername(res.data.userId);
+    //     }
+    //   } catch (err) {
+    //     navigate("/");
+    //   }
+    // }
 
-    userIsOnline();
+    // userIsOnline();
+
+    setUsername(localStorage.getItem("Username"));
   }, []);
 
   useEffect(() => {
