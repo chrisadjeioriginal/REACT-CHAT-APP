@@ -41,7 +41,7 @@ app.use(
     origin: [
       "https://playmaker-sushi-divinely.ngrok-free.dev",
       "http://localhost:5173",
-      "https://react-chat-f52wlaojx-chris-adjei-s-projects.vercel.app/",
+      "https://react-chat-f52wlaojx-chris-adjei-s-projects.vercel.app",
     ],
     credentials: true,
   }),
@@ -61,7 +61,7 @@ const io = new Server(server, {
     origin: [
       "https://playmaker-sushi-divinely.ngrok-free.dev",
       "http://localhost:5173",
-      "https://react-chat-f52wlaojx-chris-adjei-s-projects.vercel.app/",
+      "https://react-chat-f52wlaojx-chris-adjei-s-projects.vercel.app",
     ],
     credentials: true,
   },
