@@ -197,7 +197,7 @@ export function ChatApp() {
     if (!username) return;
     async function getMessages() {
       try {
-        const response = await axios.get(
+        const response = await axios.post(
           "https://playmaker-sushi-divinely.ngrok-free.dev/api/Messages",
           { myName: username },
           {
