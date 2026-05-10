@@ -343,6 +343,8 @@ app.post("/api/Friends", async (req, res) => {
 });
 
 app.get("/api/Messages", async (req, res) => {
+  const myName = req.body.myName;
+  console.log(`${myName} is trying to retrieve their messages`);
   let allMessages = await fs.readFile("../messages.txt", "utf-8");
 
   allMessages = allMessages.split("\n").filter((line) => line.trim() !== "");

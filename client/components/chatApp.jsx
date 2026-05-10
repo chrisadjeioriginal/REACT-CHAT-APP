@@ -194,12 +194,15 @@ export function ChatApp() {
   }, [username]);
 
   useEffect(() => {
+    if (!username) return;
     async function getMessages() {
       try {
         const response = await axios.get(
           "https://playmaker-sushi-divinely.ngrok-free.dev/api/Messages",
+          { myName: username },
           {
             withCredentials: true,
+
             // headers: {
             //   "ngrok-skip-browser-warning": "true",
             // },
@@ -214,7 +217,7 @@ export function ChatApp() {
       }
     }
     getMessages();
-  }, [friendsList]);
+  }, [username]);
 
   useEffect(() => {
     friendsLookUpRef.current = friendsLookup;
