@@ -14,7 +14,12 @@ export function SignUpForm() {
     const response = await axios.post(
       `https://playmaker-sushi-divinely.ngrok-free.dev/api/Register`,
       values,
-      { withCredentials: true },
+      {
+        withCredentials: true,
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      },
     );
 
     if (response.data.success) {

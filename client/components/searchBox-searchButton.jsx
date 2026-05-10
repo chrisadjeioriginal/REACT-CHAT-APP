@@ -14,7 +14,12 @@ export function SearchBoxSearchButton({
       const res = await axios.post(
         "https://playmaker-sushi-divinely.ngrok-free.dev/api/Users",
         { friendName: searchBoxText, myName: username },
-        { withCredentials: true },
+        {
+          withCredentials: true,
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
+        },
       );
 
       // const res = await axios.post(

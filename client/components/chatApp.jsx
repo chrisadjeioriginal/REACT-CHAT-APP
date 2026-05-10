@@ -80,6 +80,10 @@ export function ChatApp() {
     }
     const client = io("https://playmaker-sushi-divinely.ngrok-free.dev", {
       withCredentials: true,
+      transports: ["websocket"], // Add this!
+      extraHeaders: {
+        "ngrok-skip-browser-warning": "true",
+      },
     });
     // const client = io("/", { withCredentials: true });
 
@@ -110,7 +114,12 @@ export function ChatApp() {
                   convoId: msg.convoId,
                   myName: username,
                 },
-                { withCredentials: true },
+                {
+                  withCredentials: true,
+                  headers: {
+                    "ngrok-skip-browser-warning": "true",
+                  },
+                },
               );
 
               if (response.data.success) {
@@ -155,6 +164,9 @@ export function ChatApp() {
         { myName: username },
         {
           withCredentials: true,
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+          },
         },
       );
 
@@ -186,6 +198,9 @@ export function ChatApp() {
           "https://playmaker-sushi-divinely.ngrok-free.dev/api/Messages",
           {
             withCredentials: true,
+            headers: {
+              "ngrok-skip-browser-warning": "true",
+            },
           },
         );
 

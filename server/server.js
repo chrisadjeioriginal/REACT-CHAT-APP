@@ -28,32 +28,32 @@ async function checkIfUserExists(username) {
   }
 }
 
-async function isAuthenticated(UsersCookie) {
-  try {
-    let AllAuthenticatedUsers = await fs.readFile(
-      "../authenticated.txt",
-      "utf-8",
-    );
+// async function isAuthenticated(UsersCookie) {
+//   try {
+//     let AllAuthenticatedUsers = await fs.readFile(
+//       "../authenticated.txt",
+//       "utf-8",
+//     );
 
-    AllAuthenticatedUsers = AllAuthenticatedUsers.split("\n");
+//     AllAuthenticatedUsers = AllAuthenticatedUsers.split("\n");
 
-    // console.log("these are all the users", AllUsersData);
+//     // console.log("these are all the users", AllUsersData);
 
-    for (const userData of AllAuthenticatedUsers) {
-      const cookie = userData.split(" ")[1];
+//     for (const userData of AllAuthenticatedUsers) {
+//       const cookie = userData.split(" ")[1];
 
-      if (cookie === UsersCookie) {
-        console.log(`yes user is authenticated`);
-        return true;
-      }
-    }
-    return false;
-  } catch (err) {
-    return false;
-  }
-}
+//       if (cookie === UsersCookie) {
+//         console.log(`yes user is authenticated`);
+//         return true;
+//       }
+//     }
+//     return false;
+//   } catch (err) {
+//     return false;
+//   }
+// }
 
-const sessions = {};
+// const sessions = {};
 
 const app = express();
 
@@ -64,6 +64,7 @@ app.use(
     origin: "https://react-chat-app-eta-one.vercel.app",
     credentials: true,
     methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "ngrok-skip-browser-warning"],
   }),
 ); // when using ngrok, use this
 
@@ -90,6 +91,7 @@ const io = new Server(server, {
     origin: "https://react-chat-app-eta-one.vercel.app",
     credentials: true,
     methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "ngrok-skip-browser-warning"],
   },
 });
 
