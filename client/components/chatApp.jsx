@@ -194,6 +194,7 @@ export function ChatApp() {
   }, [username]);
 
   useEffect(() => {
+    if (!friendsList) return;
     async function getMessages() {
       try {
         const response = await axios.get(
@@ -214,7 +215,7 @@ export function ChatApp() {
       }
     }
     getMessages();
-  }, []);
+  }, [friendsList]);
 
   useEffect(() => {
     friendsLookUpRef.current = friendsLookup;

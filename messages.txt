@@ -47,3 +47,18 @@
 {"content":"Red people rising","recipient":"chris","sender":"analyst","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}
 {"content":"Ayt .Might check it out later 🙏","recipient":"analyst","sender":"chris","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}
 {"content":"Cool beans","recipient":"chris","sender":"analyst","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}
+{"content":"Are you the actor?","recipient":"Tom ","sender":"chris","convoId":"4604ccbf-1de1-4f9b-acf5-d18cd779e548"}
+{"content":"Are you the actor?","recipient":"Tom ","sender":"chris","convoId":"4604ccbf-1de1-4f9b-acf5-d18cd779e548"}
+{"content":"Yo","recipient":"chris","sender":"Tom","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
+{"content":"Are you the actor?","recipient":"Tom","sender":"chris","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
+{"content":"Yeah send £500","recipient":"chris","sender":"Tom","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
+{"content":"Been to Brazil ?","recipient":"chris","sender":"Tom","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
+{"content":"you the actor fr?","recipient":"Tom","sender":"john","convoId":"ffda48c0-f9c3-4b03-869e-08c216e85800"}
+{"content":"Yeah what’s it to you?","recipient":"john","sender":"Tom","convoId":"ffda48c0-f9c3-4b03-869e-08c216e85800"}
+{"content":"Brodie!","recipient":"chris","sender":"john","convoId":"5c062edc-4e34-4383-ab8a-ff2197d533d6"}
+{"content":"New phone who dis?","recipient":"john","sender":"chris","convoId":"5c062edc-4e34-4383-ab8a-ff2197d533d6"}
+{"content":"Fam","recipient":"john","sender":"Tom","convoId":"ffda48c0-f9c3-4b03-869e-08c216e85800"}
+{"content":"Who dis?","recipient":"Tom","sender":"john","convoId":"ffda48c0-f9c3-4b03-869e-08c216e85800"}
+{"content":"Hi","recipient":"chris","sender":"Tom","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
+{"content":"Hi","recipient":"chris","sender":"Tom","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
+{"content":"vro","recipient":"Tom","sender":"chris","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
