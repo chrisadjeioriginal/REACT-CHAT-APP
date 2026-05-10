@@ -93,58 +93,60 @@ export function ChatApp() {
       console.log("I have connected from react front end");
 
       client.emit("join-room", { username: username });
-
-      client.on("message", (msg) => {
-        console.log(`message being added to message store is: ${msg.content}`);
-        console.log(`sender was ${msg.sender}`);
-        setMessageStore((prev) => [...prev, msg]);
-
-        // console.log("HEYYYYYY");
-        // console.log(friendsLookup[msg.sender]);
-
-        if (!friendsLookUpRef.current[msg.sender] && msg.sender !== username) {
-          async function AddToFriendsList() {
-            try {
-              console.log("ABOUT TO SEND REQUEST");
-              const response = await axios.post(
-                "https://playmaker-sushi-divinely.ngrok-free.dev/api/Users",
-
-                {
-                  friendName: msg.sender,
-                  convoId: msg.convoId,
-                  myName: username,
-                },
-                {
-                  withCredentials: true,
-                  // headers: {
-                  //   "ngrok-skip-browser-warning": "true",
-                  // },
-                },
-              );
-
-              if (response.data.success) {
-                setFriendsList((prev) => [
-                  ...prev,
-                  { convoId: msg.convoId, friend: msg.sender },
-                ]);
-
-                setFriendsLookup((prev) => {
-                  if (prev[msg.sender] || msg.sender === username) return prev;
-
-                  return { ...prev, [msg.sender]: true };
-                });
-              }
-            } catch (error) {
-              console.log("couldnt add friend");
-              console.log("YES YOU!!");
-            }
-          }
-          AddToFriendsList();
-        }
-      });
     });
 
-    return () => client.disconnect();
+    const handler = async (msg) => {
+      // console.log(`message being added to message store is: ${msg.content}`);
+      // console.log(`sender was ${msg.sender}`);
+      setMessageStore((prev) => [...prev, msg]);
+
+      if (!friendsLookUpRef.current[msg.sender] && msg.sender !== username) {
+        // async function AddToFriendsList() {
+        try {
+          console.log("ABOUT TO SEND REQUEST");
+          const response = await axios.post(
+            "https://playmaker-sushi-divinely.ngrok-free.dev/api/Users",
+
+            {
+              friendName: msg.sender,
+              convoId: msg.convoId,
+              myName: username,
+            },
+            {
+              withCredentials: true,
+              // headers: {
+              //   "ngrok-skip-browser-warning": "true",
+              // },
+            },
+          );
+
+          if (response.data.success) {
+            setFriendsList((prev) => [
+              ...prev,
+              { convoId: msg.convoId, friend: msg.sender },
+            ]);
+
+            setFriendsLookup((prev) => {
+              if (prev[msg.sender] || msg.sender === username) return prev;
+
+              return { ...prev, [msg.sender]: true };
+            });
+          }
+        } catch (error) {
+          console.log("couldnt add friend");
+          console.log("YES YOU!!");
+        }
+      }
+    };
+
+    client.on("message", handler);
+
+    // AddToFriendsList();
+
+    return () => {
+      client.disconnect();
+      client.off("message", handler);
+    };
   }, [username]);
 
   useEffect(() => {

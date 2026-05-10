@@ -1,0 +1,4 @@
+{"participants":["Alfred","eurus_"],"convoId":"0495f568-2b28-4f55-bba5-5ebcef5d8564","friend":"Alfred"}
+{"participants":["chris","eurus_"],"convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda","friend":"chris"}
+{"participants":["alfred","eurus_"],"convoId":"7649ac77-1669-419f-bd7e-82278bb30f8b","friend":"alfred"}
+{"participants":["alfie","eurus_"],"convoId":"0f114ec5-fe6e-47be-ba2e-8271326b2348","friend":"alfie"}

@@ -4,3 +4,46 @@
 {"content":"chillin' 😎","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
 {"content":"thats whats up","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
 {"content":"yooo","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Hi","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"sup","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Nm u?","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"chillin","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Hi or something","recipient":"Alfred","sender":"eurus_","convoId":"0495f568-2b28-4f55-bba5-5ebcef5d8564"}
+{"content":"Hi","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"hi","recipient":"eurus_","sender":"chris","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"Hello","recipient":"chris","sender":"eurus_","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"how are you","recipient":"eurus_","sender":"chris","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"I’m fine thank you and you?","recipient":"chris","sender":"eurus_","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"chillin'","recipient":"eurus_","sender":"chris","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"rate my app","recipient":"eurus_","sender":"chris","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"Hmm","recipient":"chris","sender":"eurus_","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"1-10","recipient":"eurus_","sender":"chris","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"I’m deducting points for the double text and aesthetics","recipient":"chris","sender":"eurus_","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"5","recipient":"chris","sender":"eurus_","convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda"}
+{"content":"Bro","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Hi","recipient":"eurus_","sender":"alfred","convoId":"7649ac77-1669-419f-bd7e-82278bb30f8b"}
+{"content":"Hi","recipient":"alfred","sender":"eurus_","convoId":"7649ac77-1669-419f-bd7e-82278bb30f8b"}
+{"content":"Sup","recipient":"eurus_","sender":"alfred","convoId":"7649ac77-1669-419f-bd7e-82278bb30f8b"}
+{"content":"Go to bed","recipient":"alfred","sender":"eurus_","convoId":"7649ac77-1669-419f-bd7e-82278bb30f8b"}
+{"content":"yo","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Yo","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"sup","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Ayt","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"beans","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Yoo","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Waguan","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Rice and peas","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Stew","recipient":"chris","sender":"alfie","convoId":"8760fa76-7aee-40da-a9c4-1e8af1d63635"}
+{"content":"Jollof","recipient":"alfie","sender":"chris","convoId":"8760fa76-7aee-40da-a9c4-1e8af1d63635"}
+{"content":"yo","recipient":"chris","sender":"alfie","convoId":"8760fa76-7aee-40da-a9c4-1e8af1d63635"}
+{"content":"dude","recipient":"alfie","sender":"chris","convoId":"8760fa76-7aee-40da-a9c4-1e8af1d63635"}
+{"content":"Wasap","recipient":"eurus_","sender":"alfie","convoId":"0f114ec5-fe6e-47be-ba2e-8271326b2348"}
+{"content":"yooooooo","recipient":"eurus_","sender":"alfie","convoId":"0f114ec5-fe6e-47be-ba2e-8271326b2348"}
+{"content":"today is mothers day","recipient":"alfie","sender":"eurus_","convoId":"0f114ec5-fe6e-47be-ba2e-8271326b2348"}
+{"content":"food","recipient":"eurus_","sender":"alfie","convoId":"0f114ec5-fe6e-47be-ba2e-8271326b2348"}
+{"content":"Have you read \"Red Rising \" ?","recipient":"chris","sender":"analyst","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}
+{"content":"Have you read \"Red Rising\" ?","recipient":"chris","sender":"analyst","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}
+{"content":"Nah whats it about?","recipient":"analyst","sender":"chris","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}
+{"content":"Red people rising","recipient":"chris","sender":"analyst","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}
+{"content":"Ayt .Might check it out later 🙏","recipient":"analyst","sender":"chris","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}
+{"content":"Cool beans","recipient":"chris","sender":"analyst","convoId":"5e6cb731-bfe5-44ec-9545-1703774f5bdf"}

@@ -1,0 +1,2 @@
+{"participants":["alfie","chris"],"convoId":"8760fa76-7aee-40da-a9c4-1e8af1d63635","friend":"chris"}
+{"participants":["alfie","eurus_"],"convoId":"0f114ec5-fe6e-47be-ba2e-8271326b2348","friend":"eurus_"}

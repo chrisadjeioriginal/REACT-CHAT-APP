@@ -137,12 +137,12 @@ app.post("/api/Login", async (req, res) => {
   const password = req.body.password;
 
   try {
-    // const path = "../database.txt";
+    const path = "../database.txt";
 
-    // const result = await fs.readFile(path, "utf-8");
+    const result = await fs.readFile(path, "utf-8");
 
-    const dbPath = path.join(__dirname, "..", "database.txt");
-    const result = await fs.readFile(dbPath, "utf-8");
+    // const dbPath = path.join(__dirname, "..", "database.txt");
+    // const result = await fs.readFile(dbPath, "utf-8");
 
     if (!result) {
       res.json({ success: false, message: "User does not exist" });
@@ -157,7 +157,7 @@ app.post("/api/Login", async (req, res) => {
         ) {
           const uniqueId = randomUUID();
 
-          sessions[uniqueId] = username;
+          // sessions[uniqueId] = username;
 
           // await fs.appendFile(
           //   "../authenticated.txt",
