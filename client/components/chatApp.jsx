@@ -220,6 +220,12 @@ export function ChatApp() {
     friendsLookUpRef.current = friendsLookup;
   }, []);
 
+  useEffect(() => {
+    if (friendsList.length > 0 && !convoId) {
+      setConvoId(friendsList[0].convoId);
+    }
+  }, [friendsList]);
+
   return (
     <MainContainer>
       {addButtonPressed && (
