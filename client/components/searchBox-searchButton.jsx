@@ -16,9 +16,9 @@ export function SearchBoxSearchButton({
         { friendName: searchBoxText, myName: username },
         {
           withCredentials: true,
-          headers: {
-            "ngrok-skip-browser-warning": "true",
-          },
+          // headers: {
+          //   "ngrok-skip-browser-warning": "true",
+          // },
         },
       );
 

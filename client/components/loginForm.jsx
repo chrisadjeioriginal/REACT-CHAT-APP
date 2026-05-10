@@ -23,9 +23,9 @@ export function LoginForm() {
       values,
       {
         withCredentials: true,
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-        },
+        // headers: {
+        //   "ngrok-skip-browser-warning": "true",
+        // },
       },
     );
 

@@ -16,9 +16,9 @@ export function SignUpForm() {
       values,
       {
         withCredentials: true,
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-        },
+        // headers: {
+        //   "ngrok-skip-browser-warning": "true",
+        // },
       },
     );
 

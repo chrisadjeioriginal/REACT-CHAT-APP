@@ -64,7 +64,7 @@ app.use(
     origin: "https://react-chat-app-eta-one.vercel.app",
     credentials: true,
     methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "ngrok-skip-browser-warning"],
+    // allowedHeaders: ["Content-Type", "ngrok-skip-browser-warning"],
   }),
 ); // when using ngrok, use this
 
@@ -91,7 +91,7 @@ const io = new Server(server, {
     origin: "https://react-chat-app-eta-one.vercel.app",
     credentials: true,
     methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "ngrok-skip-browser-warning"],
+    // allowedHeaders: ["Content-Type", "ngrok-skip-browser-warning"],
   },
 });
 
@@ -137,9 +137,12 @@ app.post("/api/Login", async (req, res) => {
   const password = req.body.password;
 
   try {
-    const path = "../database.txt";
+    // const path = "../database.txt";
 
-    const result = await fs.readFile(path, "utf-8");
+    // const result = await fs.readFile(path, "utf-8");
+
+    const dbPath = path.join(__dirname, "..", "database.txt");
+    const result = await fs.readFile(dbPath, "utf-8");
 
     if (!result) {
       res.json({ success: false, message: "User does not exist" });
