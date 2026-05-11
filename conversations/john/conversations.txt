@@ -1,2 +1,3 @@
 {"participants":["Tom","john"],"convoId":"ffda48c0-f9c3-4b03-869e-08c216e85800","friend":"Tom"}
 {"participants":["chris","john"],"convoId":"5c062edc-4e34-4383-ab8a-ff2197d533d6","friend":"chris"}
+{"participants":["eurus_","john"],"convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795","friend":"eurus_"}

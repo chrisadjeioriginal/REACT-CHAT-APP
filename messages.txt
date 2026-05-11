@@ -63,3 +63,11 @@
 {"content":"Hi","recipient":"chris","sender":"Tom","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
 {"content":"vro","recipient":"Tom","sender":"chris","convoId":"ccac49dc-928f-48ab-ac1b-d501243f46c4"}
 {"content":"Yo waguan","recipient":"chris","sender":"alfie","convoId":"8760fa76-7aee-40da-a9c4-1e8af1d63635"}
+{"content":"Bruh","recipient":"john","sender":"eurus_","convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795"}
+{"content":"Bruh","recipient":"john","sender":"eurus_","convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795"}
+{"content":"Sup","recipient":"eurus_","sender":"john","convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795"}
+{"content":"Nothing","recipient":"john","sender":"eurus_","convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795"}
+{"content":"What will you eat?","recipient":"eurus_","sender":"john","convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795"}
+{"content":"Sweet potato apparently","recipient":"john","sender":"eurus_","convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795"}
+{"content":"Will you eat rice ?","recipient":"eurus_","sender":"john","convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795"}
+{"content":"bro","recipient":"eurus_","sender":"analyst","convoId":"b75d2bff-3c4d-46e9-89d8-700189557aae"}

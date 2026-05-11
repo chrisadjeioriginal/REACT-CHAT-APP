@@ -2,3 +2,5 @@
 {"participants":["chris","eurus_"],"convoId":"27ad6ba6-4597-4997-a8fb-da3120660fda","friend":"chris"}
 {"participants":["alfred","eurus_"],"convoId":"7649ac77-1669-419f-bd7e-82278bb30f8b","friend":"alfred"}
 {"participants":["alfie","eurus_"],"convoId":"0f114ec5-fe6e-47be-ba2e-8271326b2348","friend":"alfie"}
+{"participants":["eurus_","john"],"convoId":"0fa33723-f68c-4a33-a7d8-213b8ed02795","friend":"john"}
+{"participants":["analyst","eurus_"],"convoId":"b75d2bff-3c4d-46e9-89d8-700189557aae","friend":"analyst"}

@@ -19,6 +19,11 @@ import { SearchBoxMessageHolder } from "./searchBoxMessageHolder.jsx";
 import { SearchBoxCloseButton } from "./searchBoxCloseButton.jsx";
 import { SearchBoxSearchButton } from "./searchBox-searchButton.jsx";
 import { FriendsHolder } from "./friendsHolder.jsx";
+import { LogoutButton } from "./logout_button.jsx";
+import { LogoutMessageBox } from "./Logout-MessageBox.jsx";
+import { LogoutMessageHolder } from "./LogoutMessageHolder.jsx";
+import { LogoutMessageBoxButtonHolder } from "./LogoutMessageBoxButtonHolder.jsx";
+import { LogoutMessageBoxButton } from "./LogoutMessageBoxButton.jsx";
 
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -44,33 +49,22 @@ export function ChatApp() {
 
   const [friendsLookup, setFriendsLookup] = useState({});
 
+  const [logoutButtonPressed, setLogoutButtonPressed] = useState(false);
+
   const clientRef = useRef(null);
   const friendsLookUpRef = useRef({});
 
+  function closeLogoutButtonMessageBox() {
+    setLogoutButtonPressed(false);
+  }
+
+  function Logout() {
+    //Remember to remove cookies from browser before signing out
+    // i.e. send a request to the backend server and have it set the maxAge of cookie to 0
+    navigate("/");
+  }
+
   useEffect(() => {
-    // async function userIsOnline() {
-    //   try {
-    //     const res = await axios.get(
-    //       "https://playmaker-sushi-divinely.ngrok-free.dev/api/Online",
-    //       {
-    //         withCredentials: true,
-    //       },
-    //     );
-
-    //     if (!res.data.success) {
-    //       console.log("failed to verify user");
-    //       navigate("/");
-    //     } else {
-    //       console.log("VERIFIED USER SUCCESSFULLY");
-    //       setUsername(res.data.userId);
-    //     }
-    //   } catch (err) {
-    //     navigate("/");
-    //   }
-    // }
-
-    // userIsOnline();
-
     setUsername(localStorage.getItem("Username"));
   }, []);
 
@@ -80,12 +74,8 @@ export function ChatApp() {
     }
     const client = io("https://playmaker-sushi-divinely.ngrok-free.dev", {
       withCredentials: true,
-      transports: ["websocket"], // Add this!
-      // extraHeaders: {
-      //   "ngrok-skip-browser-warning": "true",
-      // },
+      transports: ["websocket"],
     });
-    // const client = io("/", { withCredentials: true });
 
     clientRef.current = client;
 
@@ -96,12 +86,9 @@ export function ChatApp() {
     });
 
     const handler = async (msg) => {
-      // console.log(`message being added to message store is: ${msg.content}`);
-      // console.log(`sender was ${msg.sender}`);
       setMessageStore((prev) => [...prev, msg]);
 
       if (!friendsLookUpRef.current[msg.sender] && msg.sender !== username) {
-        // async function AddToFriendsList() {
         try {
           console.log("ABOUT TO SEND REQUEST");
           const response = await axios.post(
@@ -114,9 +101,6 @@ export function ChatApp() {
             },
             {
               withCredentials: true,
-              // headers: {
-              //   "ngrok-skip-browser-warning": "true",
-              // },
             },
           );
 
@@ -159,16 +143,12 @@ export function ChatApp() {
   useEffect(() => {
     if (!username) return;
     async function getFriends() {
-      // console.log("ABOUT TO SEND REQUEST");
       const response = await axios.post(
         "https://playmaker-sushi-divinely.ngrok-free.dev/api/Friends",
 
         { myName: username },
         {
           withCredentials: true,
-          // headers: {
-          //   "ngrok-skip-browser-warning": "true",
-          // },
         },
       );
 
@@ -182,8 +162,6 @@ export function ChatApp() {
           response.data.friendsInfo.forEach((item) => {
             updatedLookup[item.friend] = true;
           });
-
-          // console.log("UPDATED LOOKUP:", updatedLookup);
 
           return updatedLookup;
         });
@@ -202,10 +180,6 @@ export function ChatApp() {
           { myName: username },
           {
             withCredentials: true,
-
-            // headers: {
-            //   "ngrok-skip-browser-warning": "true",
-            // },
           },
         );
 
@@ -231,6 +205,23 @@ export function ChatApp() {
 
   return (
     <MainContainer>
+      {logoutButtonPressed && (
+        <LogoutMessageBox>
+          <LogoutMessageHolder />
+          <LogoutMessageBoxButtonHolder>
+            <LogoutMessageBoxButton
+              message="No"
+              colour="rgb(96, 119, 236)"
+              task={closeLogoutButtonMessageBox}
+            />
+            <LogoutMessageBoxButton
+              message="Yes"
+              colour="rgb(187, 239, 81)"
+              task={Logout}
+            />
+          </LogoutMessageBoxButtonHolder>
+        </LogoutMessageBox>
+      )}
       {addButtonPressed && (
         <SearchBox>
           <SearchBoxCloseButton setAddButtonPressed={setAddButtonPressed} />
@@ -251,6 +242,7 @@ export function ChatApp() {
       )}
       <UsernameHolder username={username} />
       <Header>
+        <LogoutButton setLogoutButtonPressed={setLogoutButtonPressed} />
         <AddButton setAddButtonPressed={setAddButtonPressed} />
       </Header>
       <SubContainer>
