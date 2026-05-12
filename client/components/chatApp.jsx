@@ -51,6 +51,8 @@ export function ChatApp() {
 
   const [logoutButtonPressed, setLogoutButtonPressed] = useState(false);
 
+  const MessageContainerRef = useRef(null);
+
   const clientRef = useRef(null);
   const friendsLookUpRef = useRef({});
 
@@ -203,6 +205,11 @@ export function ChatApp() {
     }
   }, [friendsList]);
 
+  useEffect(() => {
+    MessageContainerRef.current.scrollTop =
+      MessageContainerRef.current.scrollHeight;
+  }, [messageStore]);
+
   return (
     <MainContainer>
       {logoutButtonPressed && (
@@ -257,7 +264,7 @@ export function ChatApp() {
           />
         </ChatList>
         <ChatWindow>
-          <MessageContainer>
+          <MessageContainer MessageContainerRef={MessageContainerRef}>
             <Message
               // messages={messages}
               username={username}

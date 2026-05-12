@@ -1,4 +1,4 @@
-export function MessageContainer({ children }) {
+export function MessageContainer({ children, MessageContainerRef }) {
   const style = {
     width: "100%",
     height: "100%",
@@ -10,5 +10,9 @@ export function MessageContainer({ children }) {
     // backgroundColor: "red",
   };
 
-  return <div style={style}>{children}</div>;
+  return (
+    <div style={style} ref={MessageContainerRef}>
+      {children}
+    </div>
+  );
 }
