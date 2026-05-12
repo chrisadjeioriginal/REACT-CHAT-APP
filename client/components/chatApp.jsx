@@ -223,6 +223,11 @@ export function ChatApp() {
     }
   }, [messageStore]);
 
+  useEffect(() => {
+    MessageContainerRef.current.scrollTop =
+      MessageContainerRef.current.scrollHeight;
+  }, [convoId]);
+
   return (
     <MainContainer>
       {logoutButtonPressed && (

@@ -13,8 +13,6 @@ export function FriendsHolder({
     // setConvoId(e.target.id);
     setRecipient(friend.friend);
     setConvoId(friend.convoId);
-    MessageContainerRef.current.scrollTop =
-      MessageContainerRef.current.scrollHeight;
   }
 
   return (
