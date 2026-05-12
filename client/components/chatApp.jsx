@@ -268,6 +268,7 @@ export function ChatApp() {
             messageStore={messageStore}
             setConvoId={setConvoId}
             convoId={convoId}
+            MessageContainerRef={MessageContainerRef}
           />
         </ChatList>
         <ChatWindow>

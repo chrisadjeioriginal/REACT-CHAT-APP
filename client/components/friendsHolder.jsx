@@ -5,8 +5,7 @@ export function FriendsHolder({
   friendsList,
   setRecipient,
   setConvoId,
-  messageStore, // this holds messages of between you and all your friends
-  // message store acts like a cache to prevent constant api calls to the backend
+  MessageContainerRef,
 }) {
   function displayChatMessages(friend) {
     // console.log(e.target.textContent);
@@ -14,6 +13,9 @@ export function FriendsHolder({
     // setConvoId(e.target.id);
     setRecipient(friend.friend);
     setConvoId(friend.convoId);
+
+    MessageContainerRef.current.scrollTop =
+      MessageContainerRef.current.scrollHeight;
   }
 
   return (
