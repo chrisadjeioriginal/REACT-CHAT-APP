@@ -206,8 +206,15 @@ export function ChatApp() {
   }, [friendsList]);
 
   useEffect(() => {
-    MessageContainerRef.current.scrollTop =
-      MessageContainerRef.current.scrollHeight;
+    const DistanceToBottom =
+      MessageContainerRef.current.scrollHeight -
+      MessageContainerRef.current.scrollTop -
+      MessageContainerRef.current.clientHeght;
+
+    if (DistanceToBottom < 200) {
+      MessageContainerRef.current.scrollTop =
+        MessageContainerRef.current.scrollHeight;
+    }
   }, [messageStore]);
 
   return (
