@@ -211,7 +211,7 @@ export function ChatApp() {
       MessageContainerRef.current.scrollTop -
       MessageContainerRef.current.clientHeght;
 
-    if (DistanceToBottom < 200) {
+    if (DistanceToBottom < 500) {
       MessageContainerRef.current.scrollTop =
         MessageContainerRef.current.scrollHeight;
     }
