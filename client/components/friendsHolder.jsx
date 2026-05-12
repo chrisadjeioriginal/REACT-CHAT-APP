@@ -1,21 +1,13 @@
 import "./friends.css";
 import profile from "../assets/default_profile_pic.png";
 
-export function FriendsHolder({
-  friendsList,
-  setRecipient,
-  setConvoId,
-  MessageContainerRef,
-}) {
+export function FriendsHolder({ friendsList, setRecipient, setConvoId }) {
   function displayChatMessages(friend) {
     // console.log(e.target.textContent);
     // setRecipient(e.target.textContent);
     // setConvoId(e.target.id);
     setRecipient(friend.friend);
     setConvoId(friend.convoId);
-
-    MessageContainerRef.current.scrollTop =
-      MessageContainerRef.current.scrollHeight;
   }
 
   return (
