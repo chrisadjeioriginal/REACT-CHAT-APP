@@ -209,7 +209,7 @@ export function ChatApp() {
     const DistanceToBottom =
       MessageContainerRef.current.scrollHeight -
       MessageContainerRef.current.scrollTop -
-      MessageContainerRef.current.clientHeght;
+      MessageContainerRef.current.clientHeight;
 
     if (DistanceToBottom < 500) {
       MessageContainerRef.current.scrollTop =

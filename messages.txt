@@ -82,3 +82,6 @@
 {"content":"Juice","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
 {"content":"Eggs","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
 {"content":"Toffee","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Beans","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"Rice","recipient":"chris","sender":"alfred","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
+{"content":"frosty","recipient":"alfred","sender":"chris","convoId":"d451fcbe-dbd6-41a1-94f2-4ded7b31ade1"}
